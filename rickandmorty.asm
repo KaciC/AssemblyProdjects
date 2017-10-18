@@ -40,6 +40,7 @@
 	opt8_rickdemption: .asciiz "You've got the gun! Great! "
 	
 	
+	
 .text
 	la $v0, 4
 	la $a0, intro
