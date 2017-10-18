@@ -11,7 +11,7 @@
 	
 	return: .asciiz "\n"
 	
-	rules_desc: .asciiz "How to play:\n-This is a morty survival game, so there are rules! \n	just give the number of your decision just remember morty  \n	if you end up taking the wrong step you'll ruin the adventure morty!\n you don't wanna do that morty!you might die morty! \n	To go back to the menu, enter 0\n To start kc level, enter 1\n To start parasite house, enter 2 \n"
+	rules_desc: .asciiz "How to play:\n-This is a morty survival game, so there are rules! \n	just give the number of your decision just remember morty  \n	if you end up taking the wrong step you'll ruin the adventure morty!\n you don't wanna do that morty!you might die morty! \n	To go back to the menu, enter 0\n To start kc level, enter 1\n To start parasite house, enter 2 \n ====="
 	
 	rickdemption_intro: .asciiz "=====ALL RIGHT MORTY YOU'VE CHOOSEN TO HELP ME EXCAPE FROM SPACE PRISON!!!===== .\n remember morty dont mess up! or no rick would want you!!!! i swear morty!\n Ready you ready? \n"
 	
@@ -27,9 +27,18 @@
 	
 	cousin_nikki: .asciiz  "\n cousin niki: im walkin here \n evryone laighs as rick stares back at the number and then back at the room with now 7 people \n rick:now theres 7!wich means one of you is the parasite \nwhat do you decide to do?\n enter 8\nToto agree nikki is real and tell rick to leave him alone,\n enter 9\n to agree cousin vinny is verry suspicious and ask rick to check him out \n"
 	
-	opt3_rickdemption: .asciiz "Okay morty, you've decdided to help! Do you remember the dead rick and morty barried in the back yard? \n (5) Aww man Rick Yes I remember! HOw COULD ANYONE FOR GET THAT!?!? \n (6) Ahhh geez Rick No i dont \n"
+	opt3_rickdemption: .asciiz "Okay morty, you've decdided to help! Do you remember the dead rick and morty barried in the back yard? \n (5) Aww man Rick Yes I remember! HOw COULD ANYONE FOR GET THAT!?!? \n (6) Ahhh geez Rick No i dont \n ====="
 	
-	opt4_rickdemption: .asciiz "DAMN YOU SELFISH MORTY!!! AF.. AFT... AFTER ALL I'VE DONE FOR YOU MORTY!!!"
+	opt4_rickdemption: .asciiz "DAMN YOU SELFISH MORTY!!! AF-AFTER ALL I'VE DONE FOR YOU MORTY!!!"
+
+	opt5_rickdemption: .asciiz "Well hurt up and dig them up! You can use the dead ricks portal gun! \n Come onn Morty! D-Did you seriously not think about that! \n (press enter to dig)"	
+	
+	opt6_rickdemption: .asciiz "Whoops! I must have added that to the morty mind blowers list \n (7) ask about morty mind blowers \n (8) Hurry to pick up a shovel and dig \n ====="
+	
+	opt7_rickdemption: .asciiz "We don't have time for these questions! Just help summber dig!"
+	
+	opt8_rickdemption: .asciiz "You've got the gun! Great! "
+	
 	
 .text
 	la $v0, 4
@@ -115,8 +124,29 @@
 	la $a0, opt4_rickdemption
 	syscall
 	
+	b level2
+	
 	opt5:
+	li $v0, 4
+	la $a0, opt5_rickdemption
+	syscall
+	
+	li $v0, 12
+	syscall
 	
 	opt6:
-
+	li $v0, 4
+	la $a0, opt6_rickdemption
+	syscall
+	
+	la $t0, ($v0)
+	beq $t0, 0, rules
+	beq $t0, 7, opt7
+	beq $t0, 8, opt8
+	syscall
+	
+	opt7:
+	
+	opt8:
+	
 	level2:
